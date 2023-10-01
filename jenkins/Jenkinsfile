@@ -1,13 +1,24 @@
 pipeline {
-  agent any
-  environment {
-    secret = credentials('test-user-test')
-  }
-  stages {
-    stage ('cred-call') {
-	  steps {
-	    sh 'echo $secret'
-	  }
-  }
-  }
+ agent any
+ stages {
+   stage ('testing') {
+     steps {
+	  sh 'echo "fail"; exit 1'
+	 }
+   }
     }
+ post {
+  always {
+  echo 'always run'
+  }
+  success {
+   echo 'on success'
+  }
+  failure {
+  echo 'on failure'
+  }
+  unstable {
+  echo 'run when got stabled'
+  }
+  }
+}

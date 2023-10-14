@@ -24,21 +24,19 @@ pipeline {
    }
    } 
    }
-      
-               
-   stage ('docker push'){
+     
+
+  stage ('docker push'){
      steps {
 		echo 'pushing image to docker hub'
-	script {
-    	
+	    	
 	 docker.withregistry('','DockerID'  ) {
       def image = docker.build('salahabbasi/azure_ci_cd:${BUILD_NUMBER}')
 	  image.push()
-	    }
-	  }
+	   }
 	 }
    }
      
    
  } 
-}
+} 

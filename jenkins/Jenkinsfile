@@ -34,7 +34,7 @@ pipeline {
 		echo 'pushing image to docker hub'
 	  script {  	
 	 docker.withRegistry('',registryCredential ) {
-      def image = docker.build ("salahabbasi/alpine:${BUILD_NUMBER}" .  )
+      def image = docker.build "salahabbasi/alpine:${BUILD_NUMBER}" .  
 	  Image.push()
 		 }
 	   }

@@ -1,3 +1,3 @@
-from centos:7
+from alpine:latest
 copy . /app
  

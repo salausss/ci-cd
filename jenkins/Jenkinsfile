@@ -32,7 +32,7 @@ pipeline {
      steps {
 		echo 'pushing image to docker hub'
 	  script {  	
-	 docker.withregistry('',registryCredential ) {
+	 docker.withRegistry('',registryCredential ) {
       def image = docker.build("salahabbasi/azure_ci_cd:${BUILD_NUMBER}")
 	  image.push()
 		 }
@@ -44,8 +44,3 @@ pipeline {
  } 
 }
 
- stage('Push image') {
-        withDockerRegistry([ credentialsId: "dockerhubaccount", url: "" ]) {
-        dockerImage.push()
-        }
-    }  

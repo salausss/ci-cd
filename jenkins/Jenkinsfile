@@ -1,24 +1,56 @@
-pipeline {
+CI-CD pipeline steps:
+
+agent 
+env
+check master
+docker build
+--post script
+docker push
+
+
+Pipeline {
  agent any
- stages {
-   stage ('testing') {
+ environment {
+  IMAGE_TAG = "${build_number}"
+ } 
+ Stages {
+ 
+   stage ("checkout master") {
      steps {
-	  sh 'echo "fail"; exit 1'
+	 echo "$GIT_BRANCH"
+	 }
+   } 
+   
+   stage ("docker build") {
+   steps {
+   echo "Building docker image"
+   script {
+   sh """
+   docker images -a 
+   cd docker/
+   docker build -t salahabbasi/azure_ci_cd:${BUILD_NUMBER} .
+      """
+   }
+      }
+   post {
+	 success {
+	 echo image created successfully.
+	 }
+     failuer {
+	 echo image not created as expected
+	 }
+        } }
+      
+   stage ('docker push'){
+     steps {
+		echo 'pushing image to docker hub'
+	 docker.withregistry('','DockerID'  ) {
+      def image = docker.build('salahabbasi/azure_ci_cd:${BUILD_NUMBER}')
+	  image.push()
+	  }
 	 }
    }
-    }
- post {
-  always {
-  echo 'always run'
-  }
-  success {
-   echo 'on success'
-  }
-  failure {
-  echo 'on failure'
-  }
-  unstable {
-  echo 'run when got stabled'
-  }
-  }
+     
+   
+ } 
 }

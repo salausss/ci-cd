@@ -1,6 +1,7 @@
 pipeline {
  agent any
  environment {
+ registry = https://hub.docker.com/salahabbasi
   IMAGE_TAG = "${build_number}"
  } 
  stages {
@@ -24,19 +25,26 @@ pipeline {
    }
    } 
    }
-     
-
-  stage ('docker push'){
+      
+               
+   stage ('docker push'){
      steps {
 		echo 'pushing image to docker hub'
-	    	
+	  script {  	
 	 docker.withregistry('','DockerID'  ) {
-      def image = docker.build('salahabbasi/azure_ci_cd:${BUILD_NUMBER}')
+      def image = docker.build("salahabbasi/azure_ci_cd:${BUILD_NUMBER}")
 	  image.push()
+		 }
 	   }
 	 }
    }
      
    
  } 
-} 
+}
+
+ stage('Push image') {
+        withDockerRegistry([ credentialsId: "dockerhubaccount", url: "" ]) {
+        dockerImage.push()
+        }
+    }  

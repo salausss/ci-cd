@@ -21,17 +21,18 @@ Pipeline {
    docker build -t salahabbasi/azure_ci_cd:${BUILD_NUMBER} .
       """
    }
+   } 
+   }
       
    post {
 	 success {
 	 echo image created successfully.
-		 }
+	 }
      failure {
 	 echo image not created as expected
 	 }
 	 }
-        } }
-      
+              
    stage ('docker push'){
      steps {
 		echo 'pushing image to docker hub'

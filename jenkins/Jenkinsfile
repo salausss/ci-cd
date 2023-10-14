@@ -21,13 +21,14 @@ Pipeline {
    docker build -t salahabbasi/azure_ci_cd:${BUILD_NUMBER} .
       """
    }
-      }
+      
    post {
 	 success {
 	 echo image created successfully.
 	 }
      failuer {
 	 echo image not created as expected
+	 }
 	 }
         } }
       

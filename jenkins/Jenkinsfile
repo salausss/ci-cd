@@ -21,7 +21,7 @@ pipeline {
    sh (script: 'docker images -a')
    sh (script:'''
          cd docker/
-   dockerImage = docker.build registry + ":$BUILD_NUMBER"
+      docker build -t salahabbasi/alpine:$BUILD_NUMBER .
       docker images -a 
       ''')
    }

@@ -1,7 +1,7 @@
 pipeline {
  agent any
  environment {
- registry = https://hub.docker.com/salahabbasi
+ registry = "https://hub.docker.com/salahabbasi"
   IMAGE_TAG = "${build_number}"
  } 
  stages {

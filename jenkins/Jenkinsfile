@@ -26,10 +26,10 @@ Pipeline {
       
    post {
 	 success {
-	 echo image created successfully.
+	 echo 'image created successfully.'
 	 }
      failure {
-	 echo image not created as expected
+	 echo 'image not created as expected'
 	 }
 	 }
               

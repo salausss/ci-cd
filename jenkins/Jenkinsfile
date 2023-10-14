@@ -3,6 +3,7 @@ pipeline {
  environment {
  registry = "https://hub.docker.com/salahabbasi"
  registryCredential = 'DockerID'
+ dockerImage = ''
   IMAGE_TAG = "${build_number}"
  } 
  stages {
@@ -33,8 +34,8 @@ pipeline {
 		echo 'pushing image to docker hub'
 	  script {  	
 	 docker.withRegistry('',registryCredential ) {
-      def image = docker.build("salahabbasi/azure_ci_cd:${BUILD_NUMBER}")
-	  image.push()
+     
+	  dockerImage.push()
 		 }
 	   }
 	 }

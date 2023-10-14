@@ -15,11 +15,11 @@ Pipeline {
    steps {
    echo "Building docker image"
    script {
-   sh """
+   sh '''
    docker images -a 
    cd docker/
    docker build -t salahabbasi/azure_ci_cd:${BUILD_NUMBER} .
-      """
+      '''
    }
    } 
    }

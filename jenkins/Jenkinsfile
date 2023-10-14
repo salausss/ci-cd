@@ -21,8 +21,8 @@ pipeline {
    sh (script: 'docker images -a')
    sh (script:'''
          cd docker/
-   docker build -t salahabbasi/azure_ci_cd:${BUILD_NUMBER} .
-   docker images -a 
+   dockerImage = docker.build registry + ":$BUILD_NUMBER"
+      docker images -a 
       ''')
    }
    } 
@@ -34,7 +34,7 @@ pipeline {
 		echo 'pushing image to docker hub'
 	  script {  	
 	 docker.withRegistry('',registryCredential ) {
-     
+      
 	  dockerImage.push()
 		 }
 	   }

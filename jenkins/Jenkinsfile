@@ -17,6 +17,7 @@ pipeline {
    script {
    sh '''
    docker images -a 
+   def workspace = "${workspace}"
    cd docker/
    docker build -t salahabbasi/azure_ci_cd:${BUILD_NUMBER} .
       '''

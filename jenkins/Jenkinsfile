@@ -25,8 +25,8 @@ Pipeline {
    post {
 	 success {
 	 echo image created successfully.
-	 }
-     failuer {
+		 }
+     failure {
 	 echo image not created as expected
 	 }
 	 }

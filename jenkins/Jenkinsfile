@@ -1,4 +1,4 @@
-Pipeline {
+pipeline {
  agent any
  environment {
   IMAGE_TAG = "${build_number}"

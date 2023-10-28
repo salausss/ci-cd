@@ -1,56 +1,63 @@
 pipeline {
- agent any
- environment {
- registry = "https://hub.docker.com/salahabbasi"
- registryCredential = 'DockerID'
- dockerImage = ''
-  IMAGE_TAG = "${build_number}"
- } 
- stages {
+ agent any 
  
-   stage ("checkout master") {
-     steps {
-	 echo "$GIT_BRANCH"
-	 }
-   } 
-   
-   stage ("docker build") {
-   steps {
-   echo "Building docker image"
-   script {
-   sh (script: 'docker images -a')
-   sh (script:'''
-         cd docker/
-      docker build -t salahabbasi/alpine:$BUILD_NUMBER .
-      docker images -a 
-      ''')
-   }
-   } 
-   }
-   
-   stage ('test') {
-    steps {
-   echo 'testing the build image'
-   pwsh ( script:"""
-   pytest ./tests/test_sample.py
-   """
-   )
-   }
-   }
-      
-               
-   stage ('docker push'){
-     steps {
-		echo 'pushing image to docker hub'
-	  script {  	
-	 docker.withRegistry('',registryCredential ) {
-     sh 'docker push salahabbasi/alpine:$BUILD_NUMBER'
-		 }
-	   }
-	 }
-   }
-   
-   }
-  }
+ environment {
+	registry = "https://hub.docker.com/"
+	registryCredentials = 'DockerID'
+	IMAGE_TAG = "${build_number}"
+ 
+	}
+ stages {
+  
+  stage ('get branch') {
+		steps {
+			echo $GIT_BRANCH
+			  }
+		}
+  
+  stage ('build image') {
+		steps {
+			echo 'Build docker image'
+		    script{
+				sh ( script: '''
+				cd docker/ 
+				docker images -a
+				docker build -t salahabbasi/centos:$build_number . 
+				docker images -a
+				''')
+				}	
+			  }
+			}
+  stage ('scan image') {
+		steps {
+			echo 'scanning container for vulnerability, baad me karenge'
+			}
+		}
+  stage ('image Push') 
+		{
+		steps {
+			echo 'Pushing image to dockerhub'
+		    script {
+				docker.withRegistry('',registryCredentials)
+					{
+					sh 'docker push salahabbasi/centos:$build_number'
+					}
+				   }	
+			  }
+		} 
+  
+ }
 
-     
+ post 
+ {
+	success {
+		echo 'Pipeline is working fine'
+	}
+	failure {
+		echo 'Pipeline is not configured as expected'
+	}
+	always {
+		echo 'Always keep practicing to be the best'
+	}
+ }
+}

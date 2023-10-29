@@ -1,0 +1,74 @@
+pipeline {
+ agent any
+ 
+ environment 
+	{
+	registry = 'https://hub.docker.com/'
+	registryCredential = 'DockerID'
+	}
+ stages 
+ {
+	stage ('check branch') 
+		{
+		steps 
+			{
+			echo 'Working branch is ' + "${GIT_BRANCH}"
+			}
+		}
+	
+	
+	stage (Build image) 
+	{
+		steps 
+		{
+			echo 'Building docker image from Dockerfile'
+			sh 'docker images -a'
+			script {
+				sh (script: '''
+					cd docker/
+					docker build -t salahabbasi/alpine:${BUILD_NUMBER} .
+					''')
+					}
+		}
+	}
+	stage ('container scanning')
+	{
+		steps 
+		{
+			echo 'baad me karenge, abhi kantaal aaya hai'
+		}
+	}
+
+	stage ('docker push')
+	{
+		steps 
+		{
+			echo 'Lets push to docker hub now'
+			script 
+			{
+				docker.withRegistry('',registryCredential) 
+				{
+					sh 'docker push salahabbasi/alpine:${BUILD_NUMBER}'
+				}
+			}
+		}
+	}
+ }
+
+ post 
+  {
+	success 
+	{
+		echo 'Pipeline is working as expected'
+	}
+    failure
+	{
+		echo 'Pipeline is not configured correctly'
+	}
+	always
+	{
+		echo 'be persistent, be determined, be successful'
+	}
+  }
+
+}

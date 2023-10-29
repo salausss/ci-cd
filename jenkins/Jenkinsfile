@@ -11,7 +11,7 @@ pipeline {
   
   stage ('get branch') {
 		steps {
-			echo '$GIT_BRANCH'
+			echo '${GIT_BRANCH}'
 			  }
 		}
   
@@ -22,7 +22,7 @@ pipeline {
 				sh ( script: '''
 				cd docker/ 
 				docker images -a
-				docker build -t salahabbasi/centos:$build_number . 
+				docker build -t salahabbasi/centos:${build_number} . 
 				docker images -a
 				''')
 				}	

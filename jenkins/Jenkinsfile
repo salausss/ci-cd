@@ -21,9 +21,9 @@ pipeline {
 		    script{
 				sh ( script: '''
 				cd docker/ 
-				docker images -a
-				docker build -t salahabbasi/centos:${BUILD_NUMBER} . 
-				docker images -a
+				sudo docker images -a
+				sudo docker build -t salahabbasi/centos:${BUILD_NUMBER} . 
+				sudo docker images -a
 				''')
 				}	
 			  }

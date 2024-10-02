@@ -6,7 +6,7 @@ environment {
   registry = "https://hub.docker.com/"
   dockercredentials = "docker-cred"  
   dockerimage = "salahabbasi/centos:$BUILD_NUMBER"
-  TRIVY_REPORT = "trivy-report.html"
+  TRIVY_REPORT = "trivy-report.json"
 }
 
 stages {
@@ -40,7 +40,7 @@ stages {
  script {
    sh ( script: '''
 
-  trivy image --exit-code 1 --severity HIGH,CRITICAL --format html --output ${TRIVY_REPORT} ${dockerimage}
+  trivy image --exit-code 1 --severity HIGH,CRITICAL --format json --output ${TRIVY_REPORT} ${dockerimage}
 	''')
  }  
  

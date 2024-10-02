@@ -21,7 +21,7 @@ stages {
 	script  {
 	sh ( script: '''
 	    docker images -a
-     	    docker build -t salahabbasi\centos:"$BUILD_NUMBER" .
+     	    docker build -t salahabbasi/centos:"$BUILD_NUMBER" 
 	''')
 	
 	

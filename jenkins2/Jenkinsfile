@@ -37,11 +37,7 @@ stages {
  stage ('Scanning image') {
  steps {
    echo 'starting the image scanning'
- script {
-   
- def trivyOutput = sh(script: "trivy image ${dockerimage}")
-
- }  
+   sh './trivy.sh'
  
  }
  

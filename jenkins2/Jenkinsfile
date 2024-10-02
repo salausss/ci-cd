@@ -38,7 +38,7 @@ stages {
  steps {
    echo 'starting the image scanning'
  script {
-   sh ( script: '''
+   
  def trivyOutput = sh(script: "trivy image ${dockerimage}", returnStdout: true).trim()
 
  println trivyOutput
@@ -49,8 +49,7 @@ stages {
 	echo "Vuln found further configuration needed"
   }
  
- ## trivy image --exit-code 1 --severity HIGH,CRITICAL --format json  ${dockerimage} > ${TRIVY_REPORT}
-	''')
+
  }  
  
  }

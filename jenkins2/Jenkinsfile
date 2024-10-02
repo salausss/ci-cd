@@ -19,9 +19,9 @@ stages {
  steps {
 	echo 'building image'
 	script  {
-	sh ( script: 
+	sh ( script: '''
 	    docker images -a
-	)
+	''')
 	
 	
 	}

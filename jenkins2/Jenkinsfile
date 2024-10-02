@@ -5,6 +5,8 @@ agent any
 environment {
   registry = "https://hub.docker.com/"
   dockercredentials = "docker-cred"  
+  dockerimage = "salahabbasi/centos:$BUILD_NUMBER"
+  TRIVY_REPORT = "trivy-report.html"
 }
 
 stages {
@@ -22,7 +24,7 @@ stages {
 	sh ( script: '''
 	    docker images -a
      	    cd docker
-     	    docker build -t salahabbasi/centos:"$BUILD_NUMBER" .
+     	    docker build -t ${dockerimage} .
 	    docker images -a 
 	''')
 	
@@ -32,6 +34,15 @@ stages {
  }
  }
  
+ stage ('Scanning image') {
+ steps {
+   echo 'starting the image scanning'
+   trivy image --exit-code 1 --severity HIGH,CRITICAL --format html --output ${TRIVY_REPORT} ${dockerimage}
+   
+ 
+ }
+ 
+ }
  
 
 }

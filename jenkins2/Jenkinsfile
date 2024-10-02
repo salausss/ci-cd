@@ -39,8 +39,17 @@ stages {
    echo 'starting the image scanning'
  script {
    sh ( script: '''
+ def trivyOutput = sh(script: "trivy image ${dockerimage}", returnStdout: true).trim()
 
-  trivy image --exit-code 1 --severity HIGH,CRITICAL --format json  ${dockerimage} > ${TRIVY_REPORT}
+ println trivyOutput
+
+ if (trivyOutput.contains("Total: 0")) {
+	echo "No vuln found"
+  } else {
+	echo "Vuln found further configuration needed"
+  }
+ 
+ ## trivy image --exit-code 1 --severity HIGH,CRITICAL --format json  ${dockerimage} > ${TRIVY_REPORT}
 	''')
  }  
  

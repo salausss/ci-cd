@@ -38,7 +38,7 @@ pipeline {
 		steps {
 			echo 'Pushing image to dockerhub'
 		    script {
-				docker.withRegistry('',registryCredentials)
+				docker.withRegistry('','Docker-cred')
 					{
 					sh 'docker push salahabbasi/centos:${BUILD_NUMBER}'
 					}

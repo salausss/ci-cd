@@ -10,7 +10,7 @@ environment {
 stages {
  stage ('get branch') {
    steps {
-		echo working branch is $GIT_BRANCH
+		echo 'working branch is $GIT_BRANCH'
    }
  
  }

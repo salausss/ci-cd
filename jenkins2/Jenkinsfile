@@ -38,7 +38,7 @@ stages {
             steps {
                 script {
                     // Run Trivy to scan the Docker image
-                    def trivyOutput = sh(script: "trivy image $(dockerimage)", returnStdout: true).trim()
+                    def trivyOutput = sh(script: "trivy image ${dockerimage}", returnStdout: true).trim()
 
                     // Display Trivy scan results
                     println trivyOutput

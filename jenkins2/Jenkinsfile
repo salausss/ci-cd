@@ -15,7 +15,7 @@ stages {
  
  }
  
- stage (build image) {
+ stage ('build image') {
  steps {
 	echo 'building image'
  

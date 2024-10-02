@@ -4,7 +4,7 @@ agent any
 
 environment {
   registry = "https://hub.docker.com/"
-  docker-credentials = "docker-cred"  
+  dockercredentials = "docker-cred"  
 }
 
 stages {

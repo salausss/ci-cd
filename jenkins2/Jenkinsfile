@@ -40,7 +40,7 @@ stages {
  script {
    sh ( script: '''
 
-  trivy image --exit-code 1 --severity HIGH,CRITICAL --format json --output ${TRIVY_REPORT} ${dockerimage}
+  trivy image --exit-code 1 --severity HIGH,CRITICAL --format json  ${dockerimage} > ${TRIVY_REPORT}
 	''')
  }  
  

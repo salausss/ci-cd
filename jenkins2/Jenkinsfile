@@ -37,7 +37,7 @@ stages {
  stage ('Scanning image') {
  steps {
    echo 'starting the image scanning'
-   sh './trivy.sh'
+   sh ' chmod +x ./trivy.sh'
  
  }
  

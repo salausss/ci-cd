@@ -18,6 +18,13 @@ stages {
  stage ('build image') {
  steps {
 	echo 'building image'
+	script  {
+	sh (
+	docker images -a
+	)
+	
+	
+	}
  
  }
  }

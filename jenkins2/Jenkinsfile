@@ -23,7 +23,7 @@ stages {
 	    docker images -a
      	    cd docker
      	    docker build -t salahabbasi/centos:"$BUILD_NUMBER" .
-	    d images -a 
+	    docker images -a 
 	''')
 	
 	

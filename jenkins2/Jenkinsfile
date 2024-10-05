@@ -22,7 +22,7 @@ stages {
 stage ('Sonarcheck') {
 steps {
    withSonarQubeEnv("sonar-scanner") {
-	sh "${sonar_home}/bin/sonar-scanner -Dsonar.projectname=ci-cd--2 -Dsonar.projectkey=ci-cd--2 -Dsonar.login=${sonar-cred}"
+	sh "${sonar_home}/bin/sonar-scanner -Dsonar.projectname=ci-cd--2 -Dsonar.projectkey=ci-cd--2 -Dsonar.login=${sonar_cred}"
   }
 	
 }

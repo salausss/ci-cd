@@ -21,7 +21,7 @@ stages {
 
 stage ('Sonarcheck') {
 steps {
-   withSonarQubeEnv("sonar-scanner") withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+   withSonarQubeEnv("sonar-server") {
 	println "${env.SONAR_HOST_URL}, ${env.SONAR_CONFIG_NAME}"
 	sh "${sonar_home}/bin/sonar-scanner -Dsonar.projectname=ci-cd--2 -Dsonar.projectkey=ci-cd--2 -Dsonar.login=$SONAR_AUTH_TOKEN"
   }

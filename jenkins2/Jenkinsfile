@@ -7,6 +7,7 @@ environment {
   dockercredentials = "docker-cred"  
   dockerimage = "salahabbasi/centos:$BUILD_NUMBER"
   TRIVY_REPORT = "trivy-report.json"
+  sonar_home = "tool sonar"
 }
 
 stages {
@@ -16,6 +17,16 @@ stages {
    }
  
  }
+
+stage ('Sonarcheck') {
+steps {
+   withSonarQubeEnv("Sonar") {
+	sh "$sonar_home/bin/sonar-scanner -Dsonar.projectname=ci-cd--2 Dsonar.projectkey=ci-cd--2 "
+  }
+	
+}
+	
+}
  
  stage ('build image') {
  steps {
@@ -34,14 +45,14 @@ stages {
  }
  }
  
-stage ('Scan image') {
- steps {
-	echo 'Scanning the image'
-	sh ( script: '''
-	trivy image --severity HIGH,CRITICAL -f json -o report.json salahabbasi/centos:2
-	''')
-	 
- }
+//stage ('Scan image') {
+ //steps {
+//	echo 'Scanning the image'
+//	sh ( script: '''
+//	trivy image --severity HIGH,CRITICAL -f json -o report.json salahabbasi/centos:2
+//	''')
+//	 
+// }
 	
 }
  

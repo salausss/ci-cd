@@ -8,7 +8,7 @@ environment {
   dockerimage = "salahabbasi/centos:$BUILD_NUMBER"
   TRIVY_REPORT = "trivy-report.json"
   sonar_home = tool "sonar-scanner"
-  sonar-cred = credentials('sonar-token')
+  sonar-cred = "credentials('sonar-token')"
 }
 
 stages {

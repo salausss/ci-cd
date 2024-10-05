@@ -7,8 +7,8 @@ environment {
   dockercredentials = "docker-cred"  
   dockerimage = "salahabbasi/centos:$BUILD_NUMBER"
   TRIVY_REPORT = "trivy-report.json"
-  sonar_home = tool "sonar-scanner"
-  sonar_cred = credentials('sonar-token')
+  SONAR_HOME = tool "sonar-scanner"
+  SONAR_CRED = credentials('sonar-token')
 }
 
 stages {
@@ -23,7 +23,7 @@ stage ('Sonarcheck') {
 steps {
    withSonarQubeEnv("sonar-server") {
 	println "${env.SONAR_HOST_URL}, ${env.SONAR_CONFIG_NAME}"
-	sh "${sonar_home}/bin/sonar-scanner -Dsonar.projectname=ci-cd--2 -Dsonar.projectkey=ci-cd--2 -Dsonar.login=$sonar-cred"
+	sh "${SONAR_HOME}/bin/sonar-scanner -Dsonar.projectname=ci-cd--2 -Dsonar.projectkey=ci-cd--2 -Dsonar.login=$SONAR_CRED"
   }
 	
 }

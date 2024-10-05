@@ -27,6 +27,14 @@ steps {
   }
 	
 }
+
+stage ('ODC') {
+steps {
+	dependencyCheck additionalArguments: '--scan ./', odcInstallation: 'dc'
+	dependencyCheckPublisher pattern: '**/dependencycheckReport.html'
+	
+}
+}
 	
 }
  

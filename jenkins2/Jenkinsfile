@@ -50,14 +50,12 @@ steps {
  	 }
  }
  
-//stage ('Scan image') {
- //steps {
-//	echo 'Scanning the image'
-//	sh ( script: '''
-//	trivy image --severity HIGH,CRITICAL -f json -o report.json salahabbasi/centos:2
-//	''')
-//	 
-// }
+stage ('Scan image') {
+  steps {
+	echo 'Scanning the image'
+	sh "trivy image  salahabbasi/centos:2" 
+	 }
+    }
+
 	
-	}
-}
+} 

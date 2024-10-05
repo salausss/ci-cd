@@ -23,7 +23,7 @@ stage ('Sonarcheck') {
 steps {
    withSonarQubeEnv("sonar-server") {
 	println "${env.SONAR_HOST_URL}, ${env.SONAR_CONFIG_NAME}"
-	sh "${SONAR_HOME}/bin/sonar-scanner -Dsonar.projectname=ci-cd--2 -Dsonar.projectkey=ci-cd--2 -Dsonar.login=${SONAR_CRED}"
+	sh "${SONAR_HOME}/bin/sonar-scanner -Dsonar.projectname=ci-cd--2 -Dsonar.projectKey=ci-cd--2 -Dsonar.login=${SONAR_CRED}"
   }
 	
 }

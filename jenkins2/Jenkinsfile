@@ -20,7 +20,7 @@ stages {
 
 stage ('Sonarcheck') {
 steps {
-   withSonarQubeEnv("Sonar") {
+   withSonarQubeEnv("sonar-scanner") {
 	sh "$sonar_home/bin/sonar-scanner -Dsonar.projectname=ci-cd--2 Dsonar.projectkey=ci-cd--2 "
   }
 	

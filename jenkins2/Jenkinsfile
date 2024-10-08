@@ -53,7 +53,7 @@ steps {
 stage ('Scan image') {
   steps {
 	echo 'Scanning the image'
-	sh "trivy image  salahabbasi/centos:2" 
+	sh "trivy image  ${dockerimage}" 
 	 }
     }
 

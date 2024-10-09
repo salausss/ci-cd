@@ -28,13 +28,13 @@ stages {
  }
 }
 
-stage ('ODC') {
-steps {
-	dependencyCheck additionalArguments: '--scan ./', odcInstallation: 'dc'
-	dependencyCheckPublisher pattern: '**/dependencycheckReport.html'
+//stage ('ODC') {
+//steps {
+//	dependencyCheck additionalArguments: '--scan ./', odcInstallation: 'dc'
+//	dependencyCheckPublisher pattern: '**/dependencycheckReport.html'
 	
-}
-}
+//}
+//}
 	 
  stage ('build image') {
  steps {

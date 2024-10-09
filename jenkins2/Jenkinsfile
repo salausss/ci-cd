@@ -3,7 +3,7 @@ pipeline {
 agent any
 
 environment {
-  registry = 'https://hub.docker.com/'
+  registry = "https://hub.docker.com/"
   DOCKER_CRED = credentials('docker_cred')  
   dockerimage = "salahabbasi/centos:$BUILD_NUMBER"
   //TRIVY_REPORT = "trivy-report.json"
@@ -61,7 +61,7 @@ stage ('Update deployment') {
   steps {
 	echo "Pushing image to DockerHub"
 	  script {
-		docker.withregistry('${registry}','DOCKER_CRED')
+		docker.withregistry(registry,'DOCKER_CRED')
 		  {
 		    sh 'docker push ${dockerimage}' 
 		  }

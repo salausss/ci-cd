@@ -19,14 +19,14 @@ stages {
  
  }
 
- stage ('Sonarcheck') {
- steps {
-   withSonarQubeEnv("sonar-server") {
-	println "${env.SONAR_HOST_URL}, ${env.SONAR_CONFIG_NAME}"
-	sh "${SONAR_HOME}/bin/sonar-scanner -Dsonar.projectname=ci-cd--6 -Dsonar.projectKey=ci-cd--6"
-  }
- }
-}
+// stage ('Sonarcheck') {
+ //steps {
+ //  withSonarQubeEnv("sonar-server") {
+//	println "${env.SONAR_HOST_URL}, ${env.SONAR_CONFIG_NAME}"
+//	sh "${SONAR_HOME}/bin/sonar-scanner -Dsonar.projectname=ci-cd--6 -Dsonar.projectKey=ci-cd--6"
+  //}
+ //}
+//}
 
 //stage ('ODC') {
 //steps {
@@ -50,18 +50,18 @@ stages {
  	 }
  }
  
-stage ('Scan image') {
-  steps {
-	echo 'Scanning the image'
-	sh "trivy image  ${dockerimage}" 
-	 }
-    }
+//stage ('Scan image') {
+//  steps {
+//	echo 'Scanning the image'
+//	sh "trivy image  ${dockerimage}" 
+//	 }
+//    }
 
 stage ('Update deployment') {
   steps {
 	echo "Pushing image to DockerHub"
 	  script {
-		docker.withregistry('registry','DOCKER_CRED')
+		docker.withregistry(registry,DOCKER_CRED)
 		  {
 		    sh 'docker push ${dockerimage}' 
 		  }

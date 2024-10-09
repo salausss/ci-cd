@@ -57,5 +57,12 @@ stage ('Scan image') {
 	 }
     }
 
+stage ('Update deployment') {
+  steps {
+	
+	  
+  }
+}
+
 	}
 }

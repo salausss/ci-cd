@@ -61,7 +61,7 @@ stage ('Update deployment') {
   steps {
 	echo "Pushing image to DockerHub"
 	  script {
-		docker.withregistry(registry,DOCKER_CRED)
+		docker.withRegistry(registry,docker_cred)
 		  {
 		    sh 'docker push ${dockerimage}' 
 		  }

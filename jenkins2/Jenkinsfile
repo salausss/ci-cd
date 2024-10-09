@@ -6,7 +6,7 @@ environment {
   registry = "https://hub.docker.com/"
   DOCKER_CRED = credentials('docker_cred')  
   dockerimage = "salahabbasi/centos:$BUILD_NUMBER"
-  TRIVY_REPORT = "trivy-report.json"
+  //TRIVY_REPORT = "trivy-report.json"
   SONAR_HOME = tool "sonar-scanner"
   SONAR_CRED = credentials('sonar_cred')
 }

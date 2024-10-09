@@ -5,7 +5,6 @@ agent any
 environment {
   registry = "https://hub.docker.com/"
   registryCredential = 'docker_cred'
-  //DOCKER_CRED = credentials('docker_cred')  
   dockerimage = "salahabbasi/centos:$BUILD_NUMBER"
   //TRIVY_REPORT = "trivy-report.json"
   SONAR_HOME = tool "sonar-scanner"

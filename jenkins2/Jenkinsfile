@@ -4,7 +4,7 @@ agent any
 
 environment {
   registry = "https://hub.docker.com/"
-  dockercredentials = "docker-cred"  
+  DOCKER_CRED = credentials('docker_cred')  
   dockerimage = "salahabbasi/centos:$BUILD_NUMBER"
   TRIVY_REPORT = "trivy-report.json"
   SONAR_HOME = tool "sonar-scanner"
@@ -59,7 +59,14 @@ stage ('Scan image') {
 
 stage ('Update deployment') {
   steps {
-	
+	echo "Pushing image to DockerHub"
+	  script {
+		docker.withregistry('','DOCKER_CRED')
+		  {
+		    sh 'docker push ${dockerimage}' 
+		  }
+		  
+	  }
 	  
   }
 }

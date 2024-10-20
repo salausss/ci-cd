@@ -72,7 +72,7 @@ stage ('Update deployment') {
 }
 stage ('Deployment of image') {
 	steps {
-	withCredentials([string(credentialsId: '9da8eb3f-42e9-4136-9826-2e732625738a', variable: 'GITHUB_PAT')]){
+	withCredentials([string(credentialsId: 'github_pat', variable: 'GITHUB_PAT')]){
 		script { 
 	    sh (script: '''
 	    cp -f data/deploy.yaml.template argo-yaml/deploy.yaml

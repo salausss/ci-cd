@@ -70,6 +70,12 @@ stage ('Update deployment') {
 	  
   }
 }
+stage ('Deployment of image') {
+	steps {
+	    
+		
+	}
+}
 
 	}
 }

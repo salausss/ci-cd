@@ -75,7 +75,7 @@ stage ('Deployment of image') {
 		script {
 	    sh (script: '''
 	    cp -f data/deployment.yaml.template argo-yaml/deployment.yaml
-	    sed -i "s/\${build_number}/$BUILD_NUMBER/g' argo-yaml/deployment.yaml
+	    sed -i "s/\${build_number}/$BUILD_NUMBER/g" argo-yaml/deployment.yaml
 	    git add argo-yaml/deployment.yaml
 	    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
 	    git push origin main

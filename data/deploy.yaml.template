@@ -21,6 +21,8 @@ spec:
               image: salahabbasi/centos:${build_number}
               ports:
               -   containerPort: 8084
+          imagePullSecrets:
+          - name: docker-secret
           restartPolicy: Always
     
      

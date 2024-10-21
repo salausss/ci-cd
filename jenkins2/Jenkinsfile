@@ -81,7 +81,7 @@ stage ('Deployment of image') {
  	    git config --global user.name "salausss"
 	    git add argo-yaml/deploy.yaml
 	    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-	    git push https://${GITHUB_PAT}@github.com/salausss/ci-cd.git main
+	    git push https://${GITHUB_PAT}@github.com/salausss/ci-cd HEAD:main
      	    ''')
 		} }
 		

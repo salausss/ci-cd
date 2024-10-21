@@ -7,7 +7,7 @@ metadata:
         app: centos
     
 spec:
-    replicas: 2
+    replicas:3
     selector:  
         matchLabels: 
             app: centos
@@ -18,9 +18,11 @@ spec:
         spec:        
           containers:
           -   name: centos
-              image: salahabbasi/centos:83
+              image: salahabbasi/centos:84
               ports:
               -   containerPort: 8084
+          imagePullSecrets:
+          - name: docker-secret
           restartPolicy: Always
     
      

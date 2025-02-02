@@ -7,8 +7,9 @@ environment {
   registryCredential = 'docker_cred'
   dockerimage = "salahabbasi/centos:$BUILD_NUMBER"
   //TRIVY_REPORT = "trivy-report.json"
-  SONAR_HOME = tool "sonar-scanner"
-  SONAR_CRED = credentials('sonar_id')
+  //SONAR_HOME = tool "sonar-scanner"
+  //SONAR_CRED = credentials('sonar_id')
+  SONARQUBE = 'LocalSonarQube'
 }
 
 stages {
@@ -19,14 +20,16 @@ stages {
  
  }
 
- //stage ('Sonarcheck') {
- //steps {
- //withSonarQubeEnv("sonar-server") {
-//	println "${env.SONAR_HOST_URL}, ${env.SONAR_CONFIG_NAME}"
-//	sh "${SONAR_HOME}/bin/sonar-scanner -Dsonar.projectname=salah-1 -Dsonar.projectKey=salah-1"
-  //}
- //}
-//}
+stage('SonarQube Analysis') {
+            steps {
+                script {
+                    // Run SonarQube scan
+                    withSonarQubeEnv(SONARQUBE) {
+                        sh 'mvn sonar:sonar -Dsonar.projectKey=salah-1'
+                    }
+                }
+            }
+        }
 
 //stage ('ODC') {
 //steps {

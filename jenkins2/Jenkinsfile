@@ -25,14 +25,7 @@ stage('SonarQube Analysis') {
                 script {
                     // Run SonarQube scan
                     withSonarQubeEnv(SONARQUBE) {
-                        sh '''$SCANNER_HOME/bin/sonar-scanner \
-         -Dsonar.projectKey=salah-1 \
-         -Dsonar.projectName=salah-1 \
-         -Dsonar.sources=src/ \
-         -Dsonar.java.binaries=target/classes/ \
-         -Dsonar.exclusions=src/test/java/****/*.java \
-         -Dsonar.java.libraries=/var/lib/jenkins/.m2/**/*.jar \
-         -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''
+                        sh 'mvn clean install sonar:sonar -Dsonar.projectKey=salah-1 -Dsonar.projectName=salah-1'
                     }
                 }
             }
